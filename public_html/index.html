@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+    Connecting to StalkerPortal libruary
+    Borshchov Dimitriy (grimstal@bigmir.net)
+-->
+<html>
+    <head>
+        <title>Test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="parsers/TVParser/TVStalkerParser.js"></script>
+        <script type="text/javascript" src="parsers/TVParser/TV_m3u_Parser.js"></script>
+        <!--<script type="text/javascript" src="parsers/StbParser/StbStalkerParser.js"></script>-->
+        <script type="text/javascript" src="objects/channelObject.js"></script>
+        <script type="text/javascript" src="objects/epgObject.js"></script>
+        <script type="text/javascript" src="objects/initObject.js"></script>
+        <script type="text/javascript" src="objects/authObject.js"></script>
+        <script type="text/javascript" src="objects/requestParams.js"></script>
+        <script type="text/javascript" src="clients/StalkerClient/StalkerClient.js"></script>
+<!--        <script type="text/javascript" src="clients/StalkerClient/StbStalkerClient.js"></script>
+        <script type="text/javascript" src="objects/StbObjects.js"></script>-->
+        <script type="text/javascript" src="clients/M3UClient/M3UClient.js"></script>
+
+    </head>
+    <body>
+        <div id="parsingListener"></div>
+        <div id="clientListener"></div>
+        <script>
+            $("#parsingListener").on("startChannelParsing", function () {
+                console.log("Start Parsing");
+            });
+            $("#parsingListener").on("progressChannelParsing", function (event, amount, amountOf, percent) {
+                console.log("Parsing " + percent + '%');
+            });
+            $("#parsingListener").on("endChannelParsing", function () {
+                console.log("End Parsing");
+            });
+            $("#clientListener").on("authorizationStart", function () {
+                console.log("Авторизация");
+            });
+            $("#clientListener").on("channelsRecieveStart", function () {
+                console.log("Получение каналов");
+            });
+            $("#clientListener").on("channelLinkRecieveStart", function () {
+                console.log("Загрузка...");
+            });
+            
+            var channelsContainer;
+            var genres;
+
+            var initer = new initObject();
+            initer.setMac('08:00:27:9B:3E:8C');
+//            initer.setLogin('63700');
+//            initer.setM3U("http://192.168.56.1:280/iptv18.m3u");
+//            initer.setEPG("http://192.168.56.1:280/xmltv.xml")
+//            initer.setEPG("http://www.teleguide.info/download/new3/xmltv.xml.gz");
+
+//            var client = new M3UClient();
+            var client = new StalkerClient();
+            client.init(initer).then(
+                    function (data) {
+                        client.getChannels().always(
+                                function (data) {
+                                    console.log("getChannels():");
+                                    console.log(data);
+                                    channelsContainer = data;
+                                });
+                        client.getChannels(null, true).always(
+                                function (data) {
+                                    console.log("getChannels(null, true):");
+                                    console.log(data);
+                                    channelsContainer = data;
+                                });
+                        client.getChannels('news').always(
+                                function (data) {
+                                    console.log("getChannels('news'):");
+                                    console.log(data);
+                                });
+                        client.getChannels('НОВОСТИ').always(
+                                function (data) {
+                                    console.log("getChannels('НОВОСТИ'):");
+                                    console.log(data);
+                                });
+                        client.getGenres().always(
+                                function (data) {
+                                    console.log("getGenres():");
+                                    console.log(data);
+                                    genres = data;
+                                });
+                        client.getChannelLink(318).always(
+                                function (data) {
+                                    console.log("getChannelLink(195):");
+                                    console.log(data);
+                                });
+                        client.getChannelLink('news').always(
+                                function (data) {
+                                    console.log("getChannelLink('news'):");
+                                    console.log(data);
+                                });
+                        client.getChannelLink({URL: null, channelID: 195}).always(
+                                function (data) {
+                                    console.log("getChannelLink({URL: null,channelID: 195}):");
+                                    console.log(data);
+                                });
+                        client.getChannelLink().always(
+                                function (data) {
+                                    console.log("getChannelLink():");
+                                    console.log(data);
+                                });
+                        client.getChannelLink('news', 'news').always(
+                                function (data) {
+                                    console.log("getChannelLink('news', 'news'):");
+                                    console.log(data);
+                                });
+//                        client.getEPG({URL: null, tvgName: 530, name: 'Охота и рыбалка'}).always(
+//                                function (data) {
+//                                    console.log("getEPG({URL: null, tvgName: 530, name: 'Охота и рыбалка'}):");
+//                                    console.log(data);
+//                                });
+//                        client.getEPG({URL: null, tvgName: 530, name: 'Охота и рыбалка'}, 3).always(
+//                                function (data) {
+//                                    console.log("getEPG({URL: null, tvgName: 530, name: 'Охота и рыбалка'},3):");
+//                                    console.log(data);
+//                                });
+//                        client.getEPGForDate({URL: null, tvgName: 530, name: 'Охота и рыбалка'}, new Date().setDate(new Date().getDate() + 1)).always(
+//                                function (data) {
+//                                    console.log("getEPG({URL: null, tvgName: 530, name: 'Охота и рыбалка'},tomorrow):");
+//                                    console.log(data);
+//                                });
+
+                    },
+                    function (data) {
+                        console.log(data);
+                    }).always(
+                    function (data) {
+                        console.log(data);
+                    });
+  
+
+        </script>
+    </body>
+</html>

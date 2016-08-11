@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+Connecting to StalkerPortal libruary
+Borshchov Dimitriy (grimstal@bigmir.net)
+-->
+<html>
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Тестирование</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+
+        <!--зависимости-->
+        <script src="../public_html/jquery-1.10.2.min.js"></script>
+        <script src="../public_html/objects/StbObjects.js"></script>
+        <script src="../public_html/parsers/StbParser/StbStalkerParser.js"></script>
+        
+
+        <!--файлы с функциями для тестирования-->
+        <script src="../public_html/clients/StalkerClient/StbStalkerClient.js"></script>
+
+
+        <!--конфиг-->
+        <script src="config.js"></script>
+
+    </head>
+
+    <body>
+
+        <div id="mocha"></div>
+
+        <!-- спеки объектов-->
+        <!--<script src="stb-objects-test.js"></script>-->
+
+        <!-- спеки клиентов-->
+        <script src="Stb-StalkerClient-test.js"></script>
+
+        <script>
+            mocha.run();
+        </script>
+    </body>
+
+</html>

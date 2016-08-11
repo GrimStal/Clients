@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+Connecting to StalkerPortal libruary
+Borshchov Dimitriy (grimstal@bigmir.net)
+-->
+<html>
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Тестирование</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+
+        <!--зависимости-->
+        <script src="../public_html/jquery-1.10.2.min.js"></script>
+        <script src="../public_html/moment-with-ru-locale.min.js"></script>        
+        <script src="../public_html/moment-timezone.min.js"></script>
+        <script src="../public_html/objects/authObject.js"></script>
+        <script src="../public_html/objects/channelObject.js"></script>
+        <script src="../public_html/objects/epgObject.js"></script>
+        <script src="../public_html/objects/initObject.js"></script>
+        <script src="../public_html/objects/requestParams.js"></script>
+        <script src="../public_html/parsers/TVParser/TVStalkerParser.js"></script>
+        <script src="../public_html/parsers/TVParser/TV_m3u_Parser.js"></script>
+        
+
+        <!--файлы с функциями для тестирования-->
+        <script src="../public_html/clients/StalkerClient/StalkerClient.js"></script>
+        <script src="../public_html/clients/M3UClient/M3UClient.js"></script>
+
+
+        <!--конфиг-->
+        <script src="config.js"></script>
+
+    </head>
+
+    <body>
+
+        <div id="mocha"></div>
+
+        <!-- спеки объектов-->
+        <script src="objects-test.js"></script>
+
+        <!-- спеки клиентов-->
+        <script src="StalkerClient-test.js"></script>
+        <script src="M3UClient-test.js"></script>
+
+        <script>
+            mocha.run();
+        </script>
+    </body>
+
+</html>

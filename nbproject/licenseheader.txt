@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Connecting to StalkerPortal libruary
+${licensePrefix}Borshchov Dimitriy (grimstal@bigmir.net)
+<#if licenseLast??>
+${licenseLast}
+</#if>
