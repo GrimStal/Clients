@@ -23,7 +23,7 @@ describe("Клиенты", function () {
                             });
 
                             it("подключение на основании Mac адреса", function (done) {
-                                initer.setMac("08-00-27-9B-3E-8c");
+                                initer.setMac("00-00-00-00-00-00");
                                 client.init(initer).always(function () {
                                     assert.isTrue(client._authData.isLogin());
                                     done();
@@ -31,8 +31,9 @@ describe("Клиенты", function () {
                             });
 
                             it("подключение на основании login/password", function (done) {
-                                initer.setMac("08-00-27-9B-3E-8c");
-                                initer.setLogin("63700");
+                                initer.setMac("00-00-00-00-00-00");
+                                initer.setLogin("00000");
+                                initer.setPassword("0000");
                                 client.init(initer).always(function () {
                                     assert.isTrue(client._authData.isLogin());
                                     done();
@@ -49,7 +50,7 @@ describe("Клиенты", function () {
                     });
 
                     it("Мак адрес не найден в базе, логин не введен", function (done) {
-                        initer.setMac("08-00-27-9B-3E-8d");
+                        initer.setMac("00-00-00-00-00-00");
                         client.init(initer).always(function () {
                             assert.isFalse(client._authData.isLogin());
                             done();
@@ -57,7 +58,7 @@ describe("Клиенты", function () {
                     });
 
                     it("Нет данных о мак адресе", function (done) {
-                        initer.setLogin("63700");
+                        initer.setLogin("00000");
                         client.init(initer).always(function () {
                             assert.isNull(client._authData);
                             done();
@@ -65,8 +66,8 @@ describe("Клиенты", function () {
                     });
 
                     it("Неправильный логин", function (done) {
-                        initer.setMac("08-00-27-9B-3E-8c");
-                        initer.setLogin("67300");
+                        initer.setMac("00-00-00-00-00-00");
+                        initer.setLogin("00000");
                         client.init(initer).always(function () {
                             assert.isFalse(client._authData.isLogin());
                             done();
@@ -74,8 +75,8 @@ describe("Клиенты", function () {
                     });
 
                     it("Неправильный пароль", function (done) {
-                        initer.setMac("08-00-27-9B-3E-8c");
-                        initer.setLogin("63700");
+                        initer.setMac("00-00-00-00-00-00");
+                        initer.setLogin("00000");
                         initer.setPassword("aaa");
                         client.init(initer).always(
                                 function () {
@@ -93,7 +94,7 @@ describe("Клиенты", function () {
                 before(function () {
                     initer = new initObject();
                     client = new StalkerClient();
-                    initer.setMac("08-00-27-9B-3E-8c");
+                    initer.setMac("00-00-00-00-00-00");
 
                 });
 
@@ -131,7 +132,7 @@ describe("Клиенты", function () {
             before(function () {
                 initer = new initObject();
                 client = new StalkerClient();
-                initer.setMac("08-00-27-9B-3E-8c");
+                initer.setMac("00-00-00-00-00-00");
             });
 
             describe("#getChannels, аргументы - genre_id, onlyFavotite", function () {
